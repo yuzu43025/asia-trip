@@ -1,13 +1,13 @@
 
 gsap.utils.toArray(".fade").forEach(function(el){
     gsap.from(el, {
-        duration: '0.8',
-      ease: "Power3.easeIn",
+        duration: '0.6',
+      ease: "Power2.easeIn",
       opacity:0,
       scale: 1.15,
       scrollTrigger: {
           trigger: el,
-          start: 'top 70%'
+          start: 'top 60%'
       }
     });
   });
@@ -45,20 +45,34 @@ $(function() {
       }
 
     //以下フッター手前で止まる処理
-    scrollHeight = $(document).height();
-    scrollPosition = $(window).height() + $(window).scrollTop();
-    footHeight = $('footer').innerHeight();
+    scrollHeight = $(document).height(); //ドキュメントの高さ
+    scrollPosition = $(window).height() + $(window).scrollTop();//現在地 
+    footHeight = $('footer').innerHeight();//footerの高さ（＝止めたい位置）
    
-    if ( scrollHeight - scrollPosition  <= footHeight ) {
-        share.css({     //cssを書き換える
-            'position':'absolute',
-            'bottom':footHeight,
+    if ( scrollHeight - scrollPosition  <= footHeight ) {//ドキュメントの高さと現在地の差がfooterの高さ以下になったら
+        share.css({ //cssを書き換える
+            'position':'absolute',//pisitionをabsolute（親：wrapperからの絶対値）に変更
+            'bottom':footHeight,//下からfooterの高さ 
         });
     } else {
-        share.css({     //スクロールして上に戻った場合は元に戻る
+        share.css({ //スクロールして上に戻った場合は元に戻る
           'position':'fixed',
           'bottom':'24px',
         });
         }
     });
+});
+
+var tab = new Swiper('.tab-content', {
+  //タブコンテンツ
+  slidesPerView: 1,
+  autoHeight: true, 
+  
+  //タブメニュー
+  thumbs: {
+      swiper: {
+          el: '.tab-menu',
+          slidesPerView: 2,
+      }
+  },
 });
